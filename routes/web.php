@@ -14,3 +14,15 @@
 $router->get('/', function () use ($router) {
     return $router->app->version();
 });
+
+$router->group(['domain' => 'http://local.salon.com/'], function() use ($router) {
+
+    $router->group(['prefix' => 'Member'], function() use ($router) {
+
+        $router->get('/', ['uses' => 'Home\MemberController@index', 'as' => 'MemberIndex']);
+
+        $router->get('/credit', ['uses' => 'Home\MemberController@credit', 'as' => 'MemberCredit']);
+
+    });
+
+});
